@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'widget/start_rating.dart';
 
 //main函数作为程序的入口
 void main() => runApp(MyApp());
@@ -11,28 +12,8 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: Text("滑动监听"),
           ),
-          body: Container()
+          body: GYStartRating(rating: 6.5,)
         )
-    );
-  }
-}
-
-class GYStartRating extends StatefulWidget {
-  const GYStartRating({Key? key}) : super(key: key);
-
-  @override
-  _GYStartRatingState createState() => _GYStartRatingState();
-}
-
-class _GYStartRatingState extends State<GYStartRating> {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        children: [
-          Icon(Icons.star_border,size: 30,color: Colors.grey,)
-        ],
-      ),
     );
   }
 }
