@@ -10,9 +10,9 @@ import 'bottom_bar_item.dart';
 List<GYBottomBarItem> items = [
   GYBottomBarItem("home", "首页"),
   GYBottomBarItem("subject", "书影音"),
-  // GYBottomBarItem("group", "小组"),
-  // GYBottomBarItem("mall", "市集"),
-  // GYBottomBarItem("profile", "我的"),
+  GYBottomBarItem("group", "小组"),
+  GYBottomBarItem("mall", "市集"),
+  GYBottomBarItem("profile", "我的"),
 ];
 
 //初始化所有page
