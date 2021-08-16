@@ -70,15 +70,17 @@ class GYHomeMovieItem extends StatelessWidget {
 
   //2.2内容信息
   Widget buildContentInfo(){
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-          buildContentInfoTitle(),
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+            buildContentInfoTitle(),
+            SizedBox(height: 8,),
+            buildContentInfoRate(),
           SizedBox(height: 8,),
-          buildContentInfoRate(),
-        SizedBox(height: 8,),
-        buildContentInfoDesc()
-      ],
+          buildContentInfoDesc()
+        ],
+      ),
     );
   }
 
@@ -88,12 +90,12 @@ class GYHomeMovieItem extends StatelessWidget {
       TextSpan(
         children: [
           WidgetSpan(
-              child: Icon(Icons.play_circle_outline, color: Colors.pink,size: 30,),
+              child: Icon(Icons.play_circle_outline, color: Colors.pink,size: 24,),
               baseline: TextBaseline.ideographic,
             alignment: PlaceholderAlignment.middle
           ),
-          WidgetSpan(child: Text(movie.movied_title_china), style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold), alignment: PlaceholderAlignment.middle),
-          WidgetSpan(child: Text("(${movie.movied_plot.split("/").first})", style: TextStyle(fontSize: 18,color: Colors.grey),))
+          WidgetSpan(child: Text(movie.movied_title_china), style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), alignment: PlaceholderAlignment.middle),
+          WidgetSpan(child: Text("(${movie.movied_plot.split("/").first})", style: TextStyle(fontSize: 15,color: Colors.grey),))
         ]
       )
     );
@@ -113,7 +115,7 @@ class GYHomeMovieItem extends StatelessWidget {
   //2.5 描述
   Widget buildContentInfoDesc() {
     //1.字符串的拼接
-    final result = movie.movied_plot + "\n" + movie.movied_director;
+    final result = movie.movied_plot + movie.movied_director;
     return Text(result, maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 16),);
   }
 
