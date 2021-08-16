@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_flutter/douban/model/load_data.dart';
 import 'initialize_times.dart';
 
 class GYMainPage extends StatefulWidget {
@@ -27,6 +28,7 @@ class _GYMainPageState extends State<GYMainPage> {
         currentIndex: _currentIndex,
         items: items,
         onTap: (index){
+          GYDataHandleTools.loadJsonData();
           setState(() {
             _currentIndex = index;
           });

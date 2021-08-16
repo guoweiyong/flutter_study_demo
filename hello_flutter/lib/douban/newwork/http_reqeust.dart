@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-class GYHttpRequest  {
+class GYHttpRequest {
 
   //防止每次请求都创建一个新的Dio对象
   static final Dio _dio = Dio();
@@ -45,9 +45,10 @@ class GYHttpRequest  {
 
     //2.发送网络请求
     try {
-      Response response = await _dio.request(url,queryParameters: params,options: options);
+      Response response = await _dio.request(
+          url, queryParameters: params, options: options);
       return response.data;
-    } on DioError catch(e) {
+    } on DioError catch (e) {
       return Future.error(e);
     }
   }
