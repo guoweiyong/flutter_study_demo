@@ -8,27 +8,13 @@ import 'package:provider/provider.dart';
 
 //main函数作为程序的入口
 void main() {
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (ctx) => GYDataChangerNotifier()),
-    ChangeNotifierProvider(create: (ctx) => GYDataChangerNotifier()),
-    ChangeNotifierProvider(create: (ctx) => GYDataChangerNotifier())
-  ]));
+  runApp(
+    //使用ChangeNotifierProvider作为顶层，不管在那里都可以访问这个共享数据
+      ChangeNotifierProvider(create: (ctx) {
+        return GYDataChangerNotifier();
+      }, child: MyApp(),)
+  );
 }
-// void main() {
-//   runApp(
-//       //使用ChangeNotifierProvider作为顶层，不管在那里都可以访问这个共享数据
-//       ChangeNotifierProvider(
-//     create: (ctx) {
-//       return GYDataChangerNotifier();
-//     },
-//     child: ChangeNotifierProvider(
-//       create: (ctx) {
-//         return GYDataChangerNotifier();
-//       },
-//       child: MyApp(),
-//     ),
-//   ));
-// }
 
 class MyApp extends StatefulWidget {
 
@@ -41,7 +27,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-          body: Center(
+            body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -50,7 +36,7 @@ class _MyAppState extends State<MyApp> {
                 ],
               ),
             ),
-          /*
+            /*
             Selector({
               Key? key,
               required ValueWidgetBuilder<S> builder,
@@ -102,11 +88,11 @@ class GYShowData02 extends StatelessWidget {
     //访问共享数据 static T of<T>(BuildContext context, {bool listen = true})
     //int counter = Provider.of<GYDataChangerNotifier>(context).counter;
     return Container(
-      color: Colors.blue,
-      child: Consumer<GYDataChangerNotifier>(
-          builder: (ctx, model, child) {
-            return Text("当前计数: ${model.counter}", style: TextStyle(fontSize: 30));
-      })
+        color: Colors.blue,
+        child: Consumer<GYDataChangerNotifier>(
+            builder: (ctx, model, child) {
+              return Text("当前计数: ${model.counter}", style: TextStyle(fontSize: 30));
+            })
     );
   }
 }
