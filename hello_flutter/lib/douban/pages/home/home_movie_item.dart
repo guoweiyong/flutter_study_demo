@@ -103,6 +103,12 @@ class GYHomeMovieItem extends StatelessWidget {
 
   //2.4 平分
   Widget buildContentInfoRate() {
+    //这里直接使用row展示， 当手机屏幕小的小的时候，你设置的start的宽度加上文字宽度，可能超过系统给定的展示宽度，会报错
+    // 第一种解决方法：  GYStartRating中size属性设置小一点
+    // 第二种解决方法： 使用FittedBox 来包裹row， 这个空间的作用是，当你里面的子控件的宽度超过FittedBox的宽度，FittedBox会压缩里面的内容,然后正常显示
+    // FittedBox中含有一个属性fit，这个属性的类型是BoxFit， 和图片一样这个里面有很多属性值
+
+    //第三种方法： 自已写一个适配库，或则是使用第三方的适配库，自己定义一个单位
     return Row(
       children: [
         GYStartRating(rating: double.parse(movie.movied_average),ratingSize: 20,),
