@@ -67,11 +67,11 @@ class _GYTextState extends State<GYText> {
     // TODO: implement initState
     super.initState();
     //监听事件，收取消息
-   eventBus.on<UserInfoEvent>().listen((event) {
-     setState(() {
-       message = "${event.name}-${event.level}";
-     });
-   });
+    eventBus.on<UserInfoEvent>().listen((event) {
+      setState(() {
+        message = "${event.name}-${event.level}";
+      });
+    });
   }
   @override
   Widget build(BuildContext context) {
