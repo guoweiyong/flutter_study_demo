@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:hello_flutter/day11_animation/pages/image_details.dart';
+import 'package:hello_flutter/day11_animation/pages/mdoel_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,46 +22,11 @@ class GYHomePage extends StatefulWidget {
   _GYHomePageState createState() => _GYHomePageState();
 }
 
-/**
- * 创建动画必须是继承自 StatefulWidget
- * 首先创建AnimationController 需要混入SingleTickerProviderStateMixin 类
- */
+
 class _GYHomePageState extends State<GYHomePage> with SingleTickerProviderStateMixin {
-  //创建AnimationController
-  AnimationController? _animationController; //必须要被初始化 或则定义可选类型
-  CurvedAnimation? _curvedAnimation;
-  Animation<double>? _sizeAnimation; //大小动画
-  Animation<Color>? _colorAnimation; //颜色动画
-  Animation<double>? _rationAnimation; //旋转动画
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
 
-    //1.创建AnimationController
-    _animationController = AnimationController(vsync: this, duration: Duration(seconds: 2));
 
-    //2.设置Curved的值，（例如： 匀速，一些效果）
-    _curvedAnimation = CurvedAnimation(parent: _animationController!, curve: Curves.linear);
-
-    //3.设置Tween （作用： 设置动画的改变值大小， 因为默认情况下AnimationController的动画值是【0.0，1.0】如果你想使用别的值，必须使用Tween）
-    // Tween(begin: 50, end: 150) 这个两个值的类型是T 也就是泛型，但是实际我们需要是double类型，这些写50默认是Int类型，所以这里需要些50.0
-    _sizeAnimation = Tween(begin: 50.0, end: 150.0).animate(_curvedAnimation!); //把值和动画关联起来
-
-    // 颜色动画
-    
-    _colorAnimation = Tween(begin: Colors.red, end: Colors.blue).animate(_curvedAnimation!);
-
-    //监听动画执行状态
-    _animationController!.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        _animationController!.reverse();
-      } else if (status == AnimationStatus.dismissed) {
-        _animationController!.forward();
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,40 +35,32 @@ class _GYHomePageState extends State<GYHomePage> with SingleTickerProviderStateM
     return Scaffold(
       appBar: AppBar(title: Text("首页"),),
       body: Center(
-        child: AnimatedBuilder(
-          animation: _animationController!,
-          builder: (ctx, child) {
-            return Icon(Icons.favorite, size: _sizeAnimation!.value,color: _colorAnimation!.value,);
-          },
-        ),
+        child: Text("Test跳转模式"),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.play_circle_outline),
         onPressed: () {
           print("播放动画按钮点击事件=======");
-          if (_animationController!.isAnimating) {
-            _animationController!.stop();
-          } else {
-            if (_animationController!.status == AnimationStatus.forward) {
-              /*开始动画*/
-              _animationController!.forward();
-            } else if (_animationController!.status == AnimationStatus.reverse) {
-              /*开始动画*/
-              _animationController!.reverse();
-            } else {
-              /*开始动画*/
-              _animationController!.forward();
-            }
+          // iOS -> Modal方式
+         Navigator.of(context).push(MaterialPageRoute(
+           builder: (ctx) {
+             return GYModelPage();
+           },
+           fullscreenDialog: true
+         ));
+         //转场动画跳转方式
+//           Navigator.of(context).push(PageRouteBuilder(
+//               transitionDuration: Duration(seconds: 3),
+//               pageBuilder: (ctx, animation1, animation2) {
+//                 return FadeTransition(
+//                   opacity: animation1,
+//                   child: GYModelPage(),
+//                 );
+//               }
+//           ));
+//          Navigator.of(context).pushNamed(routeName)
           }
-        },
       ),
     );
-  }
-  @override
-  void dispose() {
-    _animationController!.dispose();
-    // TODO: implement dispose
-    super.dispose();
-
   }
 }
