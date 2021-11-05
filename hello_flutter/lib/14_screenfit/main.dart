@@ -40,8 +40,8 @@ class _GYHomePageState extends State<GYHomePage> {
       ),
       body: Center(
         child: Container(
-          width: 200.0.dpx(),
-          height: 200.0.dpx(),
+          width: 200.0.dpx,
+          height: 200.0.dpx,
           color: Colors.orange,
         ),
       ),

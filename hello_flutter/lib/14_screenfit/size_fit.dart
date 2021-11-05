@@ -64,12 +64,21 @@ class GYSizeFit  {
 //给double写一个分类
 extension sizeFit on double {
   //使用像素适配大小
-  double dpx() {
-    return this * GYSizeFit.instance.dpr;
+  // double dpx() {
+  //   return this * GYSizeFit.instance.dpr;
+  // }
+  //
+  // // 使用px（物理宽度适配）
+  // double px() {
+  //   return this * GYSizeFit.instance.px;
+  // }
+
+  // 调用方法200.0.px(),但是发现后面跟着一个（） 不方便我们可以把（）去掉
+  double get px {
+    return this * GYSizeFit.instance.px;
   }
 
-  // 使用px（物理宽度适配）
-  double px() {
-    return this * GYSizeFit.instance.px;
+  double get dpx {
+    return this * GYSizeFit.instance.dpr;
   }
 }
