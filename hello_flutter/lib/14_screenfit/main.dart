@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'size_fit.dart';
+import 'int_fit.dart';
 
 void main() {
   return runApp(MyApp());
@@ -40,7 +41,7 @@ class _GYHomePageState extends State<GYHomePage> {
       ),
       body: Center(
         child: Container(
-          width: 200.0.dpx,
+          width: 200.dpx,
           height: 200.0.dpx,
           color: Colors.orange,
         ),
